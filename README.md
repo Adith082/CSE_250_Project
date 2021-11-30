@@ -1,4 +1,4 @@
-# G24-Recursion-Visualizer
+# G24-Subtitle-Hack
 
 Expected Timeline
 =================
@@ -12,7 +12,7 @@ SL | LearningSection | Description | Status | Comment |
 2  | Web BackEnd Section | Basics of JavaScript and NodeJs | ![javaScript_status](https://img.shields.io/badge/JavaScript-Learned-success) ![nodeJs_status](https://img.shields.io/badge/NodeJS-25%20May-blueviolet) |  |
 
 
-SUBTITLE HACKS
+SUBTITLE HACK
 ==============
 
 MOTIVATION : 
