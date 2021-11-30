@@ -1,0 +1,82 @@
+
+
+
+
+body{
+   
+    background-color: darkred;
+    font-family: 'Staatliches', cursive;
+}
+
+.header{
+      text-align: center;
+      font-size: x-large;
+      color: wheat;
+      font-style: inherit;
+      font-family: 'Staatliches', cursive;
+}
+
+.subtitle-1{
+      font-size: 2em;
+      color: sandybrown;
+}
+.para-1{
+      font-size: x-large;
+      color: wheat;
+      font-family: 'Righteous', cursive;
+}
+#uploadFile{
+      text-align: center;
+      color: whitesmoke;
+      font-family: 'Staatliches', cursive;
+}
+
+#searchResult{
+      color:wheat;
+}    #btn{
+       margin-left: 590px;
+       border-radius: 2rem;
+       font-family: 'Staatliches', cursive;
+       width: 120px;
+       height: 50px;
+       background-color: sandybrown;
+       color: darkred;
+       font-size: xx-large;
+       cursor: pointer;
+       margin-top: 50px;
+}       
+  
+#searchBox{
+             height: 50px;
+             width: 200px;
+             border: 1px solid black;
+             font-family: 'Staatliches', cursive;
+             border-radius: 1rem;
+             font-size: xx-large;
+             margin-left: 300px;
+}
+   #upload{
+          font-size: x-large;
+          font-family: 'Staatliches', cursive;
+          background-color: wheat;
+          color: darkred;
+          margin-left: 100px;
+          border: 2px solid black;
+   }
+   #logout{
+      margin-left: 590px;
+      border-radius: 2rem;
+      font-family: 'Staatliches', cursive;
+      width: 120px;
+      height: 50px;
+      background-color: blue;
+      color: wheat;
+      font-size: xx-large;
+      cursor: pointer;
+      margin-top: 40px;
+   }
+   #subLink{
+         background-color:white;
+         color: darkblue;
+         border: 2px solid black;
+   }
