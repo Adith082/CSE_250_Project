@@ -36,7 +36,8 @@ will only have to input the time stamps and following that user will
 Get every words information as an output on the web page according to the specific (Videos 
 TimeStamp).Users will have the freedom to select a specific word on a specific moment of timestamp eventually filtering the known words from the unknown words.
 Thus it will save a huge amount of time and user will have an enjoyable experience
-Both watching as well as gaining vocabulary knowledge from desired videos with subtitles
+Both watching as well as gaining vocabulary knowledge from desired videos with subtitles.
+
 API:
 ===
 (https://dictionaryapi.dev/) used to get the required data for every English word.  
