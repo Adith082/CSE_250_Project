@@ -44,5 +44,5 @@ API:
 
 REQUIREMENTS USED:
 ==================
-1. Html , Css , Vanilla.
+1. Html , Css , VanillaJs
 2. Firebase for (Authorization, RealtimeDatabase).
