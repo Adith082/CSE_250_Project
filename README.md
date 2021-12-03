@@ -46,3 +46,5 @@ REQUIREMENTS USED:
 ==================
 1. Html , Css , VanillaJs
 2. Firebase for (Authorization, RealtimeDatabase).
+3. For Hosting purpose used (netlify) 
+4. websitelink : https://subtitle-hacks.netlify.app/
