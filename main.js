@@ -245,7 +245,7 @@ document.getElementById('upload')
   document.querySelector("#logout").addEventListener("click",function(){
      auth.signOut().then(()=>{
             
-            location.href = "./src/auth.html";
+            location.href = "./index.html";
      });       
   }); 
   }

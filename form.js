@@ -38,10 +38,10 @@ document.querySelector("#signup").addEventListener("click",function(){
         createUserWithEmailAndPassword(auth, email, password)
 .then((userCredential) => {
 // Signed in 
-location.href = "../index.html";
+location.href = "./main.html";
 const user = userCredential.user;
 alert("signed up");
-location.href = "../index.html"
+//location.href = "main.html"
 // ...
 })
 .catch((error) => {
@@ -64,9 +64,9 @@ let password = document.getElementById("password").value;
 signInWithEmailAndPassword(auth, email, password)
 .then((userCredential) => {
 alert("signed in");
-//location.href = "../index.html";
+location.href = "./main.html";
 const user = userCredential.user;
-location.href = "../index.html";
+//location.href = "main.html";
 // ...
 })
 .catch((error) => {
@@ -77,20 +77,4 @@ alert(errorMessage);
 }); 
 }
   
-// for sign out
-if(document.querySelector("#signout") != null){ 
-document.querySelector("#signout").addEventListener("click",function(){
-   auth.signOut().then(()=>{
-           console.log("user is signed out");
-   });       
-}); 
-}
 
-
-// for getting the signed in users unique id
- 
-   
-       
-//console.log("user token again 2" + firebaseConfig.id);
-
- 
