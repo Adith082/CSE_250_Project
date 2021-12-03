@@ -28,8 +28,9 @@ let wordMap = new Map();
   onAuthStateChanged(auth, (user) =>  {
     if (user) {
          console.log(user.uid);
+        
          firebaseRef = ref(db,user.uid);
-       
+         
     } else {
     console.log("user is currently signed out");
        
@@ -48,12 +49,14 @@ let wordMap = new Map();
  let strLen;
   
     
-
+  
     function createButtonDiv(){
       respectiveWords2 = [];
+      respectiveWords = [];
+      wordMap.clear();
       btnWords = [];
       divWords = [];
-      for(let i = 0;i<150;i++){
+      for(let i = 0;i<5000;i++){
       btnWord = document.createElement("button");
        btnWord.style.background = "darkred";
        btnWord.style.color = "whitesmoke";
@@ -99,14 +102,11 @@ document.getElementById('upload')
 
 // checking whether the respective word exists in the database or not
  function wordExist(strWord,callBack){
-     let fl = true;
-     let avail = [];
     onValue(firebaseRef, (snapshot) => {
-       // let fl = true;
+        let fl = true;
         snapshot.forEach(function(element){
              if(element.val().inputWord == strWord){
                  fl = false;
-                 
              }
         });
             callBack(fl,strWord);
@@ -119,8 +119,8 @@ document.getElementById('upload')
  //TRACKING THE WORDS ACCORDING TO THE TIME LIMIT USER GIVES AS INPUT AND THEN THE FUNCTION outputWord DOES THE REST OF THE PART.
   
   document.querySelector("#btn").addEventListener("click",wordSearch);
-function wordSearch(){
-       respectiveWords2 = [];
+ 
+ function wordSearch(){
       createButtonDiv();
       timeToSearch = document.getElementById("searchBox").value;
         document.getElementById("searchResult").innerHTML = "";
@@ -136,17 +136,10 @@ function wordSearch(){
                     if((totalText[k] >= 'a' && totalText[k] <= 'z') || (totalText[k]>='A' && totalText[k]<='Z')){
                          wordToSearch += totalText[k];
                     }else{
+                       
                         if(wordToSearch != ""){
-                                respectiveWords.push(wordToSearch.toUpperCase());
-                                if(wordToSearch.length > 2){
-                                wordExist(wordToSearch.toUpperCase(),function(flagValue,outPutString){
-                                    if(flagValue == true)  {
-                                     
-                                      outputWord(outPutString);
-                                    }
-                                });
-                              }   wordToSearch = "";
-                                
+                             if(wordToSearch.length > 2)   respectiveWords.push(wordToSearch.toUpperCase());
+                                  wordToSearch = ""; 
                                 }
                     }
                     k++;
@@ -156,63 +149,61 @@ function wordSearch(){
 
        }
        
-            respectiveWords2 = [];
-            respectiveWords = [];
-            collectButtonListener();
-          
+       respectiveWords.forEach(function(item,index,respectiveWords){
+        wordExist(item,function(flagValue,outPutString){
+          if((flagValue == true) && (wordMap.get(outPutString) != 1))  {
+            wordMap.set(outPutString,1);  
+            outputWord(outPutString,index,respectiveWords);
+          }
+      });
+           
+       });
+           
+          respectiveWords = [];
+          collectButtonListener();
+            
 }   
 
 
 
 
 //AFTER GETTING THE RESPECTIVE WORD , HERE WE ARE SENDING A REQUEST TO THE API TO GIVE INFORMATION ABOUT THE WORD AND THEN  THE INFO IS BEING APPENDED AS A CHILD INSIDE DIV searchResult.
-function outputWord(wordToSearch){
+ function outputWord(wordToSearch){
     
+  
     let request = new XMLHttpRequest();
     request.open('GET', 'https://api.dictionaryapi.dev/api/v2/entries/en_US/' + wordToSearch, true);
     request.onload = function(){
          let data = JSON.parse(this.response);
           let temp = "   ";
+          if(data["title"] == undefined){
           for(let i = 0;i<data[0].meanings.length;i++){
              for(let j = 0;j<data[0].meanings[i].definitions.length;j++){
                     temp += data[0].meanings[i].definitions[j].definition;
                     temp += "<br>";
              }
           }
-        if(data[0].word != null){
+        }
+        if(data["title"] == undefined){
         respectiveWords2.push(data[0].word);
-        /*let nDiv = document.createElement("div");
-      nDiv.style.display= "grid";
-      nDiv.style.gridTemplateColumns = "repeat(autofit,minmax(30px,1fr))";
-      nDiv.style.gap= "1rem";
-      nDiv.style.alignItems= "flex-start";
-      nDiv.style.background= "whitesmoke";
-      nDiv.style.padding= "1rem";
-      nDiv.style.border= "1px solid black";
-      nDiv.style.color= "darkred";
-      nDiv.style.borderRadius= ".25rem";*/
           mainWord = document.createElement("h1");
          mainWord.style.font = "2em";
          mainWord.innerHTML = data[0].word;
          let resultBar = document.getElementById("searchResult");
          resultBar.style.visibility = "visible";
          divWords[respectiveWords2.length-1].appendChild(mainWord);
-        // nDiv.appendChild(mainWord);
          let wordMeaning = document.createElement("p");
          wordMeaning.style.font = "4rem";
          wordMeaning.innerHTML = temp;
          divWords[respectiveWords2.length-1].appendChild(wordMeaning);
-         //nDiv.appendChild(wordMeaning);
          btnWords[respectiveWords2.length - 1].innerHTML = "CRYSTAL_CLEARED_" + data[0].word.toUpperCase();
-         //btnWords[respectiveWords2.length - 1].style.visibility = "visible";
-         //divWords[respectiveWords2.length-1].style.visibility = "visible";
          divWords[respectiveWords2.length-1].appendChild(btnWords[respectiveWords2.length - 1]);
          resultBar.appendChild(divWords[respectiveWords2.length-1]);
-           
         }
      
     }
-    request.send();
+    request.send(null);
+  
        
 }
 
@@ -230,7 +221,11 @@ function outputWord(wordToSearch){
       if(alreadyKnownWord != null){    let inputWord = alreadyKnownWord.toUpperCase();
          set(push(firebaseRef),{inputWord});
          btnWord.style.visibility = "hidden";
+         btnWord.style.opacity = "0";
+         btnWord.style.transition = "visibility 0s linear 0.33s, opacity 0.33s linear";
          alreadyKnownDiv.style.visibility = "hidden";
+         alreadyKnownDiv.style.opacity = "0";
+         alreadyKnownDiv.style.transition = "visibility 0s linear 0.33s, opacity 0.33s linear";
       }
 }
 

@@ -9,16 +9,21 @@ body{
 }
 
 .header{
+      border-radius: 2rem;
+      background-color: white;
       text-align: center;
       font-size: x-large;
-      color: wheat;
+      color: darkred;
       font-style: inherit;
       font-family: 'Staatliches', cursive;
 }
 
 .subtitle-1{
+      border: 2px solid black;
       font-size: 2em;
-      color: sandybrown;
+      color: darkred;
+      background-color: wheat;
+      width: 11rem;
 }
 .para-1{
       font-size: x-large;
@@ -26,6 +31,7 @@ body{
       font-family: 'Righteous', cursive;
 }
 #uploadFile{
+
       text-align: center;
       color: whitesmoke;
       font-family: 'Staatliches', cursive;
@@ -39,7 +45,7 @@ body{
        font-family: 'Staatliches', cursive;
        width: 120px;
        height: 50px;
-       background-color: sandybrown;
+       background-color: wheat;
        color: darkred;
        font-size: xx-large;
        cursor: pointer;

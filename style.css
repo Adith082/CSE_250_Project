@@ -1,23 +1,29 @@
 
 @keyframes example {
     0%   {background-color:darkred;}
-    25%  {background-color:yellow;}
-    50%  {background-color: darkblue;}
-    100% {background-color:tomato;}
+    25%  {background-color:wheat;}
+    50%  {background-color: palevioletred;}
+    100% {background-color:yellowgreen;}
   }
 
 body{
       background-color: wheat;
-      font-family: 'Staatliches', cursive;
+      font-family: 'Staatliches', cursive;     
 }
 .header{
+    box-shadow: 5px 5px darkred;
     text-align: center;
     font-size: x-large;
     color: darkred;
     font-style: inherit;
     font-family: 'Staatliches', cursive;
+    background-color: tomato;
+    border-radius: 2rem;
 }
 .formContainer{
+    box-shadow: 5px 5px black;
+    padding: 1rem;
+    border-radius: 7rem;
     margin: auto;
     height: 30rem;
     width: 37rem;
@@ -30,7 +36,7 @@ body{
     
 }
 #signup{
-       
+    box-shadow: 2px 2px black;   
     border-radius: 2rem;
     font-family: 'Staatliches', cursive;
     border: 2px solid darkblue;
@@ -40,6 +46,7 @@ body{
     cursor: pointer;
 }
 #signin{
+    box-shadow: 2px 2px black;
     border-radius: 2rem;
     font-family: 'Staatliches', cursive;
     border: 2px solid black;
@@ -50,6 +57,7 @@ body{
     margin-left: 30px;
 }
 #email{
+     box-shadow: 2px 2px black;
      border-radius: 2rem;
      height: 50px; 
      font-size: larger;
@@ -58,6 +66,7 @@ body{
      border: 3px solid black;
 }
 #password{
+    box-shadow: 2px 2px black;
      margin-left: 179px;
      border-radius: 2rem;
      height: 50px;
