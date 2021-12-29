@@ -220,12 +220,18 @@ document.getElementById('upload')
     
       if(alreadyKnownWord != null){    let inputWord = alreadyKnownWord.toUpperCase();
          set(push(firebaseRef),{inputWord});
-         btnWord.style.visibility = "hidden";
+       //  btnWord.style.visibility = "hidden";
          btnWord.style.opacity = "0";
-         btnWord.style.transition = "visibility 0s linear 0.33s, opacity 0.33s linear";
-         alreadyKnownDiv.style.visibility = "hidden";
+         btnWord.style.transition = "visibility 0s linear 1s, opacity 1s linear";
+        // btnWord.remove();
+        // alreadyKnownDiv.style.visibility = "hidden";
          alreadyKnownDiv.style.opacity = "0";
-         alreadyKnownDiv.style.transition = "visibility 0s linear 0.33s, opacity 0.33s linear";
+         alreadyKnownDiv.style.transition = "visibility 0s linear 1s, opacity 1s linear";
+         //alreadyKnownDiv.remove();
+         setTimeout(function(){
+           btnWord.remove();
+           alreadyKnownDiv.remove();
+         }, 1000);
       }
 }
 

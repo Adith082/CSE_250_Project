@@ -64,15 +64,18 @@ body{
      margin-top: 50px;
      margin-left: 180px;
      border: 3px solid black;
+     font-weight: bolder;
+     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 #password{
-    box-shadow: 2px 2px black;
+     box-shadow: 2px 2px black;
      margin-left: 179px;
      border-radius: 2rem;
      height: 50px;
      font-size: larger;
      margin-top: 50px;
      border: 3px solid black;
+     font-size: large;
 }
 .btns{
     margin-top: 70px;
