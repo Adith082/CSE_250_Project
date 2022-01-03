@@ -1,6 +1,7 @@
+
+//Importing functions from firebase-app.js , firebase-auth.js and firebase-database.js
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.1/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.4.1/firebase-analytics.js";
-import { getAuth, createUserWithEmailAndPassword ,signInWithEmailAndPassword , onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.4.1/firebase-auth.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.4.1/firebase-auth.js";
 import {getDatabase,ref,set,push,onValue} from "https://www.gstatic.com/firebasejs/9.4.1/firebase-database.js"
 
 const firebaseConfig = {
@@ -13,43 +14,38 @@ const firebaseConfig = {
     appId: "1:49823560767:web:33a39a3d3e2649ff2ef48a",
     measurementId: "G-Y808J8Y5MY"
   };
-// Initialize Firebase
+// Initializing  Firebase and getting a reference to Authentication
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 const auth = getAuth(app);
-let flg = true;
+
 //getting a reference to the database
 const db = getDatabase(app);
+
+//Necessary variables for implementation purpose
 let firebaseRef;
-// screen e je word gula ashbe oigular ekta track rakha
 let respectiveWords = [];
 let respectiveWords2 = [];
 let wordMap = new Map();
+let timeToSearch;
+let totalText;
+let btnWords = [];
+let divWords = [];
+let btnWord;
+let nDiv;
+let mainWord;
+  
+  //When ever an authorization state is changed this function is called
   onAuthStateChanged(auth, (user) =>  {
     if (user) {
-         console.log(user.uid);
-        
+         // Every individual user will have a specific id which is counted as a primary key for real-time database
          firebaseRef = ref(db,user.uid);
-         
     } else {
-    console.log("user is currently signed out");
-       
+      console.log("user is currently signed out");   
     }
     });
     
- let timeToSearch;
- let displayArea;
- let totalText;
- let jsonText;
- let btnWords = [];
- let divWords = [];
- let btnWord;
- let nDiv;
- let mainWord;
- let strLen;
-  
-    
-  
+
+    //Creation and design of buttons and divs for words
     function createButtonDiv(){
       respectiveWords2 = [];
       respectiveWords = [];
@@ -87,7 +83,7 @@ let wordMap = new Map();
 
       }
     }
- //HERE WHEN THE SUBTITLE FILE IS UPLOADED IS BEING TRACKED AS A STRING INSIDE THE TOTAL TEXT STRING VARIABLE
+ //Here when the subtitile file is uploaded , it is being tracked as a string inside the (totalText) string variable
 document.getElementById('upload')
             .addEventListener('change', function() {   
             var fr=new FileReader();
@@ -100,7 +96,7 @@ document.getElementById('upload')
 
 
 
-// checking whether the respective word exists in the database or not
+// checking whether the respective word exists in the database or not and passing the boolean inside a callback function
  function wordExist(strWord,callBack){
     onValue(firebaseRef, (snapshot) => {
         let fl = true;
@@ -116,10 +112,10 @@ document.getElementById('upload')
   
  
 
- //TRACKING THE WORDS ACCORDING TO THE TIME LIMIT USER GIVES AS INPUT AND THEN THE FUNCTION outputWord DOES THE REST OF THE PART.
-  
-  document.querySelector("#btn").addEventListener("click",wordSearch);
+
  
+  document.querySelector("#btn").addEventListener("click",wordSearch);
+ //Tracking the words according to the time-stamp which user gives as input and then the function outputWord does the rest of the part. 
  function wordSearch(){
       createButtonDiv();
       timeToSearch = document.getElementById("searchBox").value;
@@ -151,6 +147,7 @@ document.getElementById('upload')
        
        respectiveWords.forEach(function(item,index,respectiveWords){
         wordExist(item,function(flagValue,outPutString){
+          // the CallBack function
           if((flagValue == true) && (wordMap.get(outPutString) != 1))  {
             wordMap.set(outPutString,1);  
             outputWord(outPutString,index,respectiveWords);
@@ -167,10 +164,9 @@ document.getElementById('upload')
 
 
 
-//AFTER GETTING THE RESPECTIVE WORD , HERE WE ARE SENDING A REQUEST TO THE API TO GIVE INFORMATION ABOUT THE WORD AND THEN  THE INFO IS BEING APPENDED AS A CHILD INSIDE DIV searchResult.
+//After getting the respective word , here an API request is sent to get information about the respective word and then the information is being shown as a card-layout
  function outputWord(wordToSearch){
-    
-  
+
     let request = new XMLHttpRequest();
     request.open('GET', 'https://api.dictionaryapi.dev/api/v2/entries/en_US/' + wordToSearch, true);
     request.onload = function(){
@@ -186,7 +182,7 @@ document.getElementById('upload')
         }
         if(data["title"] == undefined){
         respectiveWords2.push(data[0].word);
-          mainWord = document.createElement("h1");
+         mainWord = document.createElement("h1");
          mainWord.style.font = "2em";
          mainWord.innerHTML = data[0].word;
          let resultBar = document.getElementById("searchResult");
@@ -196,7 +192,7 @@ document.getElementById('upload')
          wordMeaning.style.font = "4rem";
          wordMeaning.innerHTML = temp;
          divWords[respectiveWords2.length-1].appendChild(wordMeaning);
-         btnWords[respectiveWords2.length - 1].innerHTML = "CRYSTAL_CLEARED_" + data[0].word.toUpperCase();
+         btnWords[respectiveWords2.length - 1].innerHTML = "Crystal_cleared_" + data[0].word.toUpperCase();
          divWords[respectiveWords2.length-1].appendChild(btnWords[respectiveWords2.length - 1]);
          resultBar.appendChild(divWords[respectiveWords2.length-1]);
         }
@@ -208,7 +204,7 @@ document.getElementById('upload')
 }
 
 
-
+   //Respective word gets pushed into the database as well as the rcard-layout also gets erased 
    function pushingWordInDatabase(btnWord,id){
      
     let alreadyKnownWord = "";
@@ -220,14 +216,10 @@ document.getElementById('upload')
     
       if(alreadyKnownWord != null){    let inputWord = alreadyKnownWord.toUpperCase();
          set(push(firebaseRef),{inputWord});
-       //  btnWord.style.visibility = "hidden";
          btnWord.style.opacity = "0";
          btnWord.style.transition = "visibility 0s linear 1s, opacity 1s linear";
-        // btnWord.remove();
-        // alreadyKnownDiv.style.visibility = "hidden";
          alreadyKnownDiv.style.opacity = "0";
          alreadyKnownDiv.style.transition = "visibility 0s linear 1s, opacity 1s linear";
-         //alreadyKnownDiv.remove();
          setTimeout(function(){
            btnWord.remove();
            alreadyKnownDiv.remove();
@@ -236,7 +228,7 @@ document.getElementById('upload')
 }
 
 
-
+ //Card-layout button listener for pushes the clickable card-layouts id to pushingWordInDatabase function
  function collectButtonListener(){
  for(let k = 0;k<btnWords.length;k++) {if(btnWords[k] != null){ 
   btnWords[k].addEventListener("click",function(){pushingWordInDatabase(btnWords[k],k)});

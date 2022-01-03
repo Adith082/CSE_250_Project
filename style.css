@@ -1,4 +1,5 @@
 
+/*keyframes used for animation purpose*/
 @keyframes example {
     0%   {background-color:darkred;}
     25%  {background-color:wheat;}

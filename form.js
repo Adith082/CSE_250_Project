@@ -1,13 +1,9 @@
-// Import the functions you need from the SDKs you need
+// Importing necessary functions that we need from firebase-app.js and firebase-auth.js
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.1/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.4.1/firebase-analytics.js";
-import { getAuth, createUserWithEmailAndPassword ,signInWithEmailAndPassword , onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.4.1/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword ,signInWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/9.4.1/firebase-auth.js";
               
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-//module scaffolding
-const FirebaseAndUserInfo = {};
-// Your web app's Firebase configuration
+
+// web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyCnU84w-mRsQLBcak29Nw4pfgDzFelcSPQ",
@@ -20,29 +16,21 @@ const firebaseConfig = {
   measurementId: "G-Y808J8Y5MY"
 };
 
-// Initialize Firebase
+// Initializing Firebase and getting a reference to authentication
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 const auth = getAuth(app);
 
-// getting the data
-//const email = document.getElementById("email").value;
-//const password = document.getElementById("password").value;
-
-
-//  THIS PART IS FOR SIGN UP
+//  Signing up the user using firebase authentication after clicking the sign up button with required information
 if(document.querySelector("#signup") != null){
 document.querySelector("#signup").addEventListener("click",function(){
   let email = document.getElementById("email").value;
   let password = document.getElementById("password").value;
         createUserWithEmailAndPassword(auth, email, password)
 .then((userCredential) => {
-// Signed in 
+//setting the location to main.html after signing up the new user 
 location.href = "./main.html";
 const user = userCredential.user;
 alert("signed up");
-//location.href = "main.html"
-// ...
 })
 .catch((error) => {
 const errorCode = error.code;
@@ -53,10 +41,7 @@ alert(errorMessage);
 }); 
 }
 
-//functions signin
-
-
-///THIS PART IS FOR SIGN IN
+///Signing in the user using firebase authentication after clicking the sign in button with required information
 if(document.querySelector("#signin") != null){
 document.querySelector("#signin").addEventListener("click",function(){
 let email = document.getElementById("email").value;
