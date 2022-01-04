@@ -170,11 +170,12 @@ document.getElementById('upload')
     let request = new XMLHttpRequest();
     request.open('GET', 'https://api.dictionaryapi.dev/api/v2/entries/en_US/' + wordToSearch, true);
     request.onload = function(){
-         let data = JSON.parse(this.response);
+          let data = JSON.parse(this.response);
           let temp = "   ";
           if(data["title"] == undefined){
           for(let i = 0;i<data[0].meanings.length;i++){
              for(let j = 0;j<data[0].meanings[i].definitions.length;j++){
+                    temp += "#: ";
                     temp += data[0].meanings[i].definitions[j].definition;
                     temp += "<br>";
              }
@@ -190,9 +191,10 @@ document.getElementById('upload')
          divWords[respectiveWords2.length-1].appendChild(mainWord);
          let wordMeaning = document.createElement("p");
          wordMeaning.style.font = "4rem";
+         wordMeaning.style.fontSize = "x-large";
          wordMeaning.innerHTML = temp;
          divWords[respectiveWords2.length-1].appendChild(wordMeaning);
-         btnWords[respectiveWords2.length - 1].innerHTML = "Crystal_cleared_" + data[0].word.toUpperCase();
+         btnWords[respectiveWords2.length - 1].innerHTML = "Crystal_cleared_" + data[0].word;
          divWords[respectiveWords2.length-1].appendChild(btnWords[respectiveWords2.length - 1]);
          resultBar.appendChild(divWords[respectiveWords2.length-1]);
         }

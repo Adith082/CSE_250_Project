@@ -5,7 +5,8 @@
 body{
    
     background-color: darkred;
-    font-family: 'Staatliches', cursive;
+    font-family: monospace;
+    /*font-family: 'Staatliches', cursive;*/
 }
 
 .header{
@@ -15,7 +16,7 @@ body{
       font-size: x-large;
       color: darkred;
       font-style: inherit;
-      font-family: 'Staatliches', cursive;
+      /*font-family: 'Staatliches', cursive;*/
 }
 
 .subtitle-1{
@@ -31,10 +32,9 @@ body{
       font-family: 'Righteous', cursive;
 }
 #uploadFile{
-
       text-align: center;
       color: whitesmoke;
-      font-family: 'Staatliches', cursive;
+      
 }
 
 #searchResult{
@@ -63,7 +63,7 @@ body{
 }
    #upload{
           font-size: x-large;
-          font-family: 'Staatliches', cursive;
+         /* font-family: 'Staatliches', cursive; */
           background-color: wheat;
           color: darkred;
           margin-left: 100px;
