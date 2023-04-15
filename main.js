@@ -174,9 +174,14 @@ document.getElementById('upload')
           let temp = "   ";
           if(data["title"] == undefined){
           for(let i = 0;i<data[0].meanings.length;i++){
+                  temp += data[0].meanings[i].partOfSpeech;
+                  temp += ": "
+                  temp += "<br>";
+                  
              for(let j = 0;j<data[0].meanings[i].definitions.length;j++){
-                    temp += "#: ";
+                    temp += "=> ";
                     temp += data[0].meanings[i].definitions[j].definition;
+                    temp += "<br>";
                     temp += "<br>";
              }
           }
